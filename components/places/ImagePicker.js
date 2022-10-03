@@ -25,10 +25,8 @@ export default function ImagePicker() {
         "Insufficient permissions!",
         "You need to grant camera permissions to use this app"
       );
-
       return false;
     }
-
     return true;
   }
 
