@@ -1,9 +1,12 @@
-import { useState, useLayoutEffect, useCallback } from "react";
+import { useRoute } from "@react-navigation/native";
+import { useState, useLayoutEffect, useCallback, useEffect } from "react";
 import { Alert, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import IconButton from "../components/ui/IconButton";
 
 export default function Map({ navigation }) {
+  const route = useRoute();
+
   const [selectedLocation, setSelectedLocation] = useState();
   const region = {
     latitude: 37.78,
@@ -11,6 +14,14 @@ export default function Map({ navigation }) {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
+
+  useEffect(() => {
+    console.log(route.params);
+    if (route.params) {
+      region.latitude = route.params.lat;
+      region.longitude = route.params.lon;
+    }
+  }, [route]);
 
   function selectLocationHandler(event) {
     const lat = event.nativeEvent.coordinate.latitude;

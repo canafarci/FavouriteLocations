@@ -70,7 +70,12 @@ export default function LocationPicker() {
   }
 
   function pickOnMapHandler() {
-    navigation.navigate("Map");
+    navigation.navigate(
+      "Map",
+      pickedLocation
+        ? { lat: pickedLocation.latitude, lon: pickedLocation.longitude }
+        : null
+    );
   }
 
   let locationPreview = <Text>No Location Picked Yet.</Text>;
